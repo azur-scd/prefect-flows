@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Socket-Test</title>
+    <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+</head>
+<body style="background-color:white;">
+    <div id="log" ></div>
+    <script type="text/javascript" charset="utf-8">
+        namespace = '/test';
+      var socket = io(namespace).connect('http://' + document.domain + ':' + location.port);
+      socket.on('connect', function() {
+                socket.emit('my_event', {data: 'connected to the SocketServer...'});
+            });
+      socket.on('my_response', function(data) {
+          msg = data.data
+           console.log(data);
+           $('#log').append('<br>' + $('<div/>').text('logs #' + msg).html());
+      });
+</script>
+</body>
+</html>

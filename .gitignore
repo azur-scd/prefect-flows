@@ -1,0 +1,12 @@
+# Ignore virtual env folder#
+###################
+**/*venv*/**
+**/*__pycache__*/**
+
+# Ignore harvest temp and heavy ml files#
+###################
+**/*temp_*/**
+flows/bso_publis_scopus/data/05_model_input/*
+!flows/bso_publis_scopus/data/05_model_input/.gitkeep
+flows/bso_publis_scopus/notebooks/*.ipynb
+
