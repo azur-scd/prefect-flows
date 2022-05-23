@@ -62,38 +62,38 @@ def update_referentiel_data(reference_data,observation_date) -> pd.DataFrame:
         print("stop flow")
         raise signals.FAIL()
 
-@task(log_stdout=True, name="get_publis_with_affiiliations_data")
-def get_publis_with_affiiliations_data(reference_data,affiliations,observation_date) -> pd.DataFrame:
+@task(log_stdout=True, name="get_publis_with_affiliations_data")
+def get_publis_with_affiliations_data(reference_data,affiliations,observation_date) -> pd.DataFrame:
     # merge all publis with affiliations
     affiliations["affiliation_id"] = affiliations["affiliation_id"].astype('str')
     reference_data["aff_scopus_id"] = reference_data["aff_scopus_id"].astype('str')
-    publis_all_with_affiiliations_data = pd.merge(reference_data,affiliations[affiliations["affiliation_id"].notna()], left_on='aff_scopus_id', right_on='affiliation_id',how="left").drop(columns=['affiliation_id','document-count-period','ppn_valide','affcourt_valide','RNSR','VIAF','ISNI','BNF','HAL'])
-    publis_all_with_affiiliations_data = publis_all_with_affiiliations_data.rename(columns={'id': 'aff_internal_id', 'parent_id': 'aff_parent_id'})
+    publis_all_with_affiliations_data = pd.merge(reference_data,affiliations[affiliations["affiliation_id"].notna()], left_on='aff_scopus_id', right_on='affiliation_id',how="left").drop(columns=['affiliation_id','document-count-period','ppn_valide','affcourt_valide','RNSR','VIAF','ISNI','BNF','HAL'])
+    publis_all_with_affiliations_data = publis_all_with_affiliations_data.rename(columns={'id': 'aff_internal_id', 'parent_id': 'aff_parent_id'})
     # identify corresponding author if UCA
-    publis_all_with_affiiliations_data["corresponding"] = publis_all_with_affiiliations_data[publis_all_with_affiiliations_data["corresponding_author"] == "oui"].apply (lambda row: keep_duplicate(row), axis=1)
-    publis_all_with_affiiliations_data.to_csv("data/03_primary/{0}/publis_all_with_affiiliations_data.csv".format(observation_date),index = False,encoding='utf8')
-    return publis_all_with_affiiliations_data
+    publis_all_with_affiliations_data["corresponding"] = publis_all_with_affiliations_data[publis_all_with_affiliations_data["corresponding_author"] == "oui"].apply (lambda row: keep_duplicate(row), axis=1)
+    publis_all_with_affiliations_data.to_csv("data/03_primary/{0}/publis_all_with_affiliations_data.csv".format(observation_date),index = False,encoding='utf8')
+    return publis_all_with_affiliations_data
 
 @task(log_stdout=True, name="control_intermediate_data")
-def control_intermediate_data(publis_all_with_affiiliations_data,observation_date):
+def control_intermediate_data(publis_all_with_affiliations_data,observation_date):
     # % missing DOI
-    df_unique = publis_all_with_affiiliations_data.drop_duplicates(subset=['source_id'], keep='last')
+    df_unique = publis_all_with_affiliations_data.drop_duplicates(subset=['source_id'], keep='last')
     # save missing doi publs
     df_unique["doi"].isna().to_csv("data/03_primary/{0}/publis_non_traitees/without_doi.csv".format(observation_date),index = False,encoding='utf8')
     # charts
     plt.pie(np.array([df_unique["doi"].isna().sum(), df_unique["doi"].notna().sum()]), autopct='%1.1f%%')
     plt.savefig("data/08_reporting/missing_doi.png")
     # Values corresponding author
-    publis_all_with_affiiliations_data["corresponding_author"].value_counts().plot(kind='barh').get_figure().savefig("data/08_reporting/corresponding_control.png")
+    publis_all_with_affiliations_data["corresponding_author"].value_counts().plot(kind='barh').get_figure().savefig("data/08_reporting/corresponding_control.png")
 
 
 @task(log_stdout=True, name="get_publis_uniques_doi_data")
-def get_publis_uniques_doi_data(publis_all_with_affiiliations_data,corpus_end_year) -> pd.DataFrame:
+def get_publis_uniques_doi_data(publis_all_with_affiliations_data,corpus_end_year) -> pd.DataFrame:
     # Deduplicate
-    publis_all_with_affiiliations_data["corresponding_author"] = publis_all_with_affiiliations_data["corresponding_author"].astype('category')
-    publis_all_with_affiiliations_data["corresponding_author"] = publis_all_with_affiiliations_data["corresponding_author"].cat.set_categories(['oui', 'non', 'corr absent pour cette publi'], ordered=True)
-    publis_all_with_affiiliations_data.sort_values(by=['doi', 'corresponding_author'])
-    publis_uniques_doi_data = publis_all_with_affiiliations_data[publis_all_with_affiiliations_data.doi.notna()].drop_duplicates(subset=['doi'], keep='first')[["source_id","doi","year","corresponding","all_authors"]]
+    publis_all_with_affiliations_data["corresponding_author"] = publis_all_with_affiliations_data["corresponding_author"].astype('category')
+    publis_all_with_affiliations_data["corresponding_author"] = publis_all_with_affiliations_data["corresponding_author"].cat.set_categories(['oui', 'non', 'corr absent pour cette publi'], ordered=True)
+    publis_all_with_affiliations_data.sort_values(by=['doi', 'corresponding_author'])
+    publis_uniques_doi_data = publis_all_with_affiliations_data[publis_all_with_affiliations_data.doi.notna()].drop_duplicates(subset=['doi'], keep='first')[["source_id","doi","year","corresponding","all_authors"]]
     publis_uniques_doi_data = publis_uniques_doi_data[publis_uniques_doi_data.year < corpus_end_year]
     print(publis_uniques_doi_data.shape)
     publis_uniques_doi_data.to_csv("data/02_intermediate/publis_uniques_doi_data.csv",index = False,encoding='utf8')
@@ -213,15 +213,15 @@ with Flow(name=FLOW_NAME) as flow:
     corpus_end_year = Parameter('corpus_end_year',default = 2022)
     reference_data = extract_reference_data(observation_date)
     affiliations = update_referentiel_data(reference_data,observation_date)
-    publis_all_with_affiiliations_data = get_publis_with_affiiliations_data(reference_data,affiliations,observation_date)
-    publis_uniques_doi_data = get_publis_uniques_doi_data(publis_all_with_affiiliations_data,corpus_end_year)
+    publis_all_with_affiliations_data = get_publis_with_affiliations_data(reference_data,affiliations,observation_date)
+    publis_uniques_doi_data = get_publis_uniques_doi_data(publis_all_with_affiliations_data,corpus_end_year)
     publishers_doi_prefix = update_publiher_doiprefix_data(publis_uniques_doi_data)
     unpaywall_data = get_unpaywall_data(publis_uniques_doi_data)
     crossref_data = get_crossref_data(publis_uniques_doi_data)
     dissemin_data = get_dissemin_data(publis_uniques_doi_data)
     publis_uniques_doi_oa_data = merge_all_data(publis_uniques_doi_data,publishers_doi_prefix,unpaywall_data,crossref_data,dissemin_data,observation_date)
     result = get_bso_classification_data(publis_uniques_doi_oa_data,observation_date)
-    control_intermediate_data = control_intermediate_data(publis_all_with_affiiliations_data,observation_date)
+    control_intermediate_data = control_intermediate_data(publis_all_with_affiliations_data,observation_date)
 
 """with Flow(name=FLOW_NAME) as flow:
     observation_date = Parameter('observation_date',default = "2022-05-04")
