@@ -95,19 +95,25 @@ def transform_data(df_load_extract,oai) -> pd.DataFrame:
     df['embargo_duree'] = pd.to_numeric(df['embargo_duree'], downcast='integer', errors='coerce')
     #manage all nan values
     df = df.fillna('')
-    df.to_csv("data/03_primary/theses_uca_processed.csv", index=False, encoding='utf8')
     return df
+
+@task(log_stdout=True, name="save_data")
+def save_data(df_transform, observation_date) -> pd.DataFrame:
+    df_transform.to_csv(f"data/03_primary/{observation_date}/theses_uca_processed.csv", index=False, encoding='utf8')
+    return df_transform
 
 with Flow(name=FLOW_NAME) as flow:
     etabs = Parameter('etabs',default = ['NICE','AZUR','COAZ'])
+	observation_date = Parameter('observation_date',default = "2022-05-30")
     load_result = load_data()
     extract_result = extract_data(load_result,etabs)
     scrap_result = scrap_oai_data()
-    result = transform_data(extract_result,scrap_result)
+    transform_result = transform_data(extract_result,scrap_result)
+	result = save_data(transform_result,observation_date)
 
 flow.register(project_name="barometre")
 flow.storage=storage
 flow.run_config=LocalRun()
-flow.run(etabs=['NICE','AZUR','COAZ'])
+flow.run(etabs=['NICE','AZUR','COAZ'],observation_date="2022-05-30")
 
 #https://docs.prefect.io/core/advanced_tutorials/task-guide.html#state-handlers
