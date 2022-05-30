@@ -54,7 +54,8 @@ def transform_data(df_load_extract,oai) -> pd.DataFrame:
     #keep only relevant columns and rename
     df_tmp = df_load_extract[['accessible', 'auteurs.0.idref', 'auteurs.0.nom', 'auteurs.0.prenom', 'cas', 'code_etab', 'date_soutenance', 'directeurs_these.0.idref', 'directeurs_these.0.nom', 'directeurs_these.0.prenom', 'directeurs_these.1.idref', 'directeurs_these.1.nom', 'directeurs_these.1.prenom', 'discipline.fr', 'ecoles_doctorales.0.nom', 'embargo', 'etablissements_soutenance.0.idref', 'etablissements_soutenance.1.idref', 'etablissements_soutenance.0.nom', 'etablissements_soutenance.1.nom', 'iddoc', 'langue', 'nnt', 'oai_set_specs', 'partenaires_recherche.0.idref', 'partenaires_recherche.0.nom', 'partenaires_recherche.0.type', 'partenaires_recherche.1.idref', 'partenaires_recherche.1.nom', 'partenaires_recherche.1.type', 'partenaires_recherche.2.idref', 'partenaires_recherche.2.nom', 'partenaires_recherche.2.type', 'resumes.fr', 'source', 'these_sur_travaux', 'titres.fr', 'status']]
     df = df_tmp.set_axis([w.replace('.', '_') for w in df_tmp.columns], axis=1, inplace=False)
-    df = df.rename(columns={'accessible': 'open_access'})
+    df["is_oa_normalized"] = df["accessible"]
+    df['is_oa_normalized'] = df['is_oa_normalized'].replace(['oui','non'],['Accès ouvert','Accès fermé'])
     #new col année civile de soutenance
     df["annee_civile_soutenance"] = df['date_soutenance'].apply(lambda x: x.split("-")[0])
     #new col mois de soutenance

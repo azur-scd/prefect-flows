@@ -41,11 +41,11 @@ def extract_reference_data(observation_date) -> pd.DataFrame:
     return reference_data
 
 @task(log_stdout=True, name="update_referentiel_data")
-def update_referentiel_data(reference_data,observation_date) -> pd.DataFrame:
+def update_referentiel_data(reference_data) -> pd.DataFrame:
     # fetch live data
     affiliations = pd.read_json('data/03_primary/referentiel_structures.json')
     # rename and save the file in his last state
-    affiliations.to_json('data/03_primary/referentiel_structures_{0}.json'.format(observation_date),orient="records",indent=3,force_ascii=False)
+    affiliations.to_json('data/03_primary/referentiel_structures_old.json',orient="records",indent=3,force_ascii=False)
     # compare with current data df to see if new affiliations must be added ton the referential
     set_affiliations_id = set(affiliations['affiliation_id'].tolist())
     set_data_affiliations_id = set(reference_data['aff_scopus_id'].unique().tolist())
@@ -53,9 +53,9 @@ def update_referentiel_data(reference_data,observation_date) -> pd.DataFrame:
     if len(diff) == 1:
         # update records sums columns
         #affiliations =affiliations.drop(['document-count-period'])
-        df_count = reference_data["aff_scopus_id"].value_counts().rename_axis('unique_values').reset_index(name='counts').convert_dtypes()
-        affiliations = pd.merge(affiliations,df_count, left_on='affiliation_id', right_on='unique_values',how="left").drop(columns=['unique_values','document-count-period']).rename(columns={'counts':'document-count-period'})
-        affiliations['document-count-period'] = affiliations['document-count-period'].fillna(0)
+        df_count = reference_data.groupby("aff_internal_id")['doi'].nunique().reset_index().rename(columns={'doi':'counts'}).convert_dtypes()
+        affiliations = pd.merge(affiliations,df_count, left_on='id', right_on='aff_internal_id',how="left").drop(columns=['aff_internal_id','documents_count']).rename(columns={'counts':'documents_count'})
+        affiliations['documents_count'] = affiliations['documents_count'].fillna(0)
         affiliations.to_json('data/03_primary/referentiel_structures.json',orient="records",indent=3,force_ascii=False)
         return affiliations
     else:
@@ -67,7 +67,7 @@ def get_publis_with_affiliations_data(reference_data,affiliations,observation_da
     # merge all publis with affiliations
     affiliations["affiliation_id"] = affiliations["affiliation_id"].astype('str')
     reference_data["aff_scopus_id"] = reference_data["aff_scopus_id"].astype('str')
-    publis_all_with_affiliations_data = pd.merge(reference_data,affiliations[affiliations["affiliation_id"].notna()], left_on='aff_scopus_id', right_on='affiliation_id',how="left").drop(columns=['affiliation_id','document-count-period','ppn_valide','affcourt_valide','RNSR','VIAF','ISNI','BNF','HAL'])
+    publis_all_with_affiliations_data = pd.merge(reference_data,affiliations[affiliations["affiliation_id"].notna()], left_on='aff_scopus_id', right_on='affiliation_id',how="left").drop(columns=['affiliation_id','documents_count','ppn_valide','affcourt_valide','RNSR','VIAF','ISNI','BNF','HAL'])
     publis_all_with_affiliations_data = publis_all_with_affiliations_data.rename(columns={'id': 'aff_internal_id', 'parent_id': 'aff_parent_id'})
     # identify corresponding author if UCA
     publis_all_with_affiliations_data["corresponding"] = publis_all_with_affiliations_data[publis_all_with_affiliations_data["corresponding_author"] == "oui"].apply (lambda row: keep_duplicate(row), axis=1)
@@ -161,14 +161,14 @@ def get_dissemin_data(publis_uniques_doi_data) -> pd.DataFrame:
 @task(log_stdout=True, name="merge_all_data")
 def merge_all_data(publis_uniques_doi_data,publishers_doi_prefix,unpaywall_data,crossref_data,dissemin_data,observation_date) -> pd.DataFrame:
     # unpaywall data
-    publis_uniques_doi_oa_data = pd.merge(publis_uniques_doi_data,unpaywall_data, left_on='doi', right_on='source_doi',how="right").drop(columns=['source_doi'])
+    publis_uniques_doi_oa_data = pd.merge(publis_uniques_doi_data,unpaywall_data, left_on='doi', right_on='source_doi',how="right").drop(columns=['source_doi','year_upw'])
     # publishers doi prefix
     publis_uniques_doi_oa_data["doi_prefix"] = publis_uniques_doi_oa_data.apply (lambda row: str(row["doi"].partition("/")[0]), axis=1) 
     publis_uniques_doi_oa_data["doi_prefix"] = publis_uniques_doi_oa_data["doi_prefix"].astype(str)
     publishers_doi_prefix["prefix"] = publishers_doi_prefix["prefix"].astype(str)
     publis_uniques_doi_oa_data = publis_uniques_doi_oa_data.merge(publishers_doi_prefix, left_on='doi_prefix', right_on='prefix',how='left').drop(columns=['prefix'])
     # crossref data
-    publis_uniques_doi_oa_data = publis_uniques_doi_oa_data.merge(crossref_data, left_on='doi', right_on='source_doi',how='left').drop(columns=['source_doi'])
+    publis_uniques_doi_oa_data = publis_uniques_doi_oa_data.merge(crossref_data, left_on='doi', right_on='source_doi',how='left').drop(columns=['source_doi','published-online-date','journal-published-print-date','published-print-date'])
     # dissemin data
     publis_uniques_doi_oa_data = pd.merge(publis_uniques_doi_oa_data,dissemin_data, left_on='doi', right_on='source_doi',how="left").drop(columns=['source_doi'])
     publis_uniques_doi_oa_data.to_csv("data/03_primary/{0}/publis_uniques_doi_oa_data.csv".format(observation_date), index= False,encoding='utf8')
@@ -212,7 +212,7 @@ with Flow(name=FLOW_NAME) as flow:
     observation_date = Parameter('observation_date',default = "2022-05-04")
     corpus_end_year = Parameter('corpus_end_year',default = 2022)
     reference_data = extract_reference_data(observation_date)
-    affiliations = update_referentiel_data(reference_data,observation_date)
+    affiliations = update_referentiel_data(reference_data)
     publis_all_with_affiliations_data = get_publis_with_affiliations_data(reference_data,affiliations,observation_date)
     publis_uniques_doi_data = get_publis_uniques_doi_data(publis_all_with_affiliations_data,corpus_end_year)
     publishers_doi_prefix = update_publiher_doiprefix_data(publis_uniques_doi_data)

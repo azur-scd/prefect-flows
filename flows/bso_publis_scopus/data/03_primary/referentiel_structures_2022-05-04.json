@@ -1,6 +1,6 @@
 [
    {
-      "affiliation-name":"UCA (Université)",
+      "affiliation_name":"UCA (Université)",
       "affiliation_id":"0",
       "ppn_valide":"",
       "affcourt_valide":"",
@@ -11,10 +11,10 @@
       "HAL":"",
       "id":1,
       "parent_id":0,
-      "document-count-period":0
+      "documents_count":0
    },
    {
-      "affiliation-name":"OCA",
+      "affiliation_name":"OCA",
       "affiliation_id":"0",
       "ppn_valide":"",
       "affcourt_valide":"",
@@ -25,10 +25,10 @@
       "HAL":"",
       "id":2,
       "parent_id":0,
-      "document-count-period":0
+      "documents_count":0
    },
    {
-      "affiliation-name":"Villa Arson",
+      "affiliation_name":"Villa Arson",
       "affiliation_id":"0",
       "ppn_valide":"",
       "affcourt_valide":"",
@@ -39,10 +39,10 @@
       "HAL":"",
       "id":3,
       "parent_id":0,
-      "document-count-period":0
+      "documents_count":0
    },
    {
-      "affiliation-name":"UCA (affiliation)",
+      "affiliation_name":"UCA (affiliation)",
       "affiliation_id":"60110693",
       "ppn_valide":"",
       "affcourt_valide":"",
@@ -53,10 +53,10 @@
       "HAL":"",
       "id":4,
       "parent_id":1,
-      "document-count-period":7474
+      "documents_count":7474
    },
    {
-      "affiliation-name":"Institut de Pharmacologie Moléculaire et Cellulaire",
+      "affiliation_name":"Institut de Pharmacologie Moléculaire et Cellulaire",
       "affiliation_id":"60006380",
       "ppn_valide":"05957321X",
       "affcourt_valide":"Institut de pharmacologie moléculaire et cellulaire (Sophia Antipolis, Alpes-Maritimes)",
@@ -67,10 +67,10 @@
       "HAL":"199361",
       "id":5,
       "parent_id":1,
-      "document-count-period":1710
+      "documents_count":1710
    },
    {
-      "affiliation-name":"Centre de Recherche sur l'Hétéro-Epitaxie et ses Applications",
+      "affiliation_name":"Centre de Recherche sur l'Hétéro-Epitaxie et ses Applications",
       "affiliation_id":"60006696",
       "ppn_valide":"060408278",
       "affcourt_valide":"Centre de recherche sur l'hétéro-épitaxie et ses applications (Sophia Antipolis, Alpes-Maritimes)",
@@ -81,10 +81,10 @@
       "HAL":"409",
       "id":6,
       "parent_id":1,
-      "document-count-period":1071
+      "documents_count":1071
    },
    {
-      "affiliation-name":"Observatoire de la Côte d'Azur",
+      "affiliation_name":"Observatoire de la Côte d'Azur",
       "affiliation_id":"60010513",
       "ppn_valide":"035675683",
       "affcourt_valide":"Observatoire de la Côte d'Azur",
@@ -95,10 +95,10 @@
       "HAL":"",
       "id":7,
       "parent_id":2,
-      "document-count-period":673
+      "documents_count":673
    },
    {
-      "affiliation-name":"Le Laboratoire Géoazur",
+      "affiliation_name":"Le Laboratoire Géoazur",
       "affiliation_id":"60101367",
       "ppn_valide":"172062225",
       "affcourt_valide":"Laboratoire Géoazur (Sophia Antipolis, Alpes-Maritimes)",
@@ -109,10 +109,10 @@
       "HAL":"",
       "id":8,
       "parent_id":2,
-      "document-count-period":1554
+      "documents_count":1554
    },
    {
-      "affiliation-name":"Étude des Structures et des Processus d’Adaptation et des Changements de l’Espace",
+      "affiliation_name":"Étude des Structures et des Processus d’Adaptation et des Changements de l’Espace",
       "affiliation_id":"60107106",
       "ppn_valide":"182401367",
       "affcourt_valide":"Étude des structures, des processus d'adaptation et des changements de l'espace. UMR 7300 (Nice ; 2012-)",
@@ -123,10 +123,10 @@
       "HAL":"87217",
       "id":9,
       "parent_id":1,
-      "document-count-period":205
+      "documents_count":205
    },
    {
-      "affiliation-name":"Laboratoire Souterrain à Bas Bruit",
+      "affiliation_name":"Laboratoire Souterrain à Bas Bruit",
       "affiliation_id":"60107140",
       "ppn_valide":"234479388",
       "affcourt_valide":"Laboratoire Souterrain à Bas Bruit",
@@ -137,10 +137,10 @@
       "HAL":"",
       "id":10,
       "parent_id":1,
-      "document-count-period":33
+      "documents_count":33
    },
    {
-      "affiliation-name":"Laboratoire de Mathématiques J.A. Dieudonné",
+      "affiliation_name":"Laboratoire de Mathématiques J.A. Dieudonné",
       "affiliation_id":"60110369",
       "ppn_valide":"060325887",
       "affcourt_valide":"Laboratoire J.-A. Dieudonné (Nice)",
@@ -151,10 +151,10 @@
       "HAL":"199970",
       "id":11,
       "parent_id":1,
-      "document-count-period":1338
+      "documents_count":1338
    },
    {
-      "affiliation-name":"Cognition Behaviour Technology",
+      "affiliation_name":"Cognition Behaviour Technology",
       "affiliation_id":"60110689",
       "ppn_valide":"168085461",
       "affcourt_valide":"Cognition Behaviour Technology (Nice)",
@@ -165,10 +165,10 @@
       "HAL":"168629",
       "id":12,
       "parent_id":1,
-      "document-count-period":430
+      "documents_count":430
    },
    {
-      "affiliation-name":"Transporteurs en Imagerie et Radiothérapie en Oncologie",
+      "affiliation_name":"Transporteurs en Imagerie et Radiothérapie en Oncologie",
       "affiliation_id":"60110690",
       "ppn_valide":"228218861",
       "affcourt_valide":"Transporteurs en Imagerie et Radiothérapie en Oncologie",
@@ -179,10 +179,10 @@
       "HAL":"238190",
       "id":13,
       "parent_id":1,
-      "document-count-period":217
+      "documents_count":217
    },
    {
-      "affiliation-name":"Microbiologie Orale, Immunothérapie et Santé",
+      "affiliation_name":"Microbiologie Orale, Immunothérapie et Santé",
       "affiliation_id":"60110692",
       "ppn_valide":"191161470",
       "affcourt_valide":"Microbiologie Orale, Immunothérapie et Santé",
@@ -193,10 +193,10 @@
       "HAL":"450080",
       "id":14,
       "parent_id":1,
-      "document-count-period":190
+      "documents_count":190
    },
    {
-      "affiliation-name":"Centre Méditerranéen de Médecine Moléculaire",
+      "affiliation_name":"Centre Méditerranéen de Médecine Moléculaire",
       "affiliation_id":"60110695",
       "ppn_valide":"161561578",
       "affcourt_valide":"Centre Méditerranéen de Médecine Moléculaire (Nice)",
@@ -207,10 +207,10 @@
       "HAL":"180122",
       "id":15,
       "parent_id":1,
-      "document-count-period":2267
+      "documents_count":2267
    },
    {
-      "affiliation-name":"Institut de Recherche sur le Cancer et le Vieillissement, Nice",
+      "affiliation_name":"Institut de Recherche sur le Cancer et le Vieillissement, Nice",
       "affiliation_id":"60110697",
       "ppn_valide":"184404983",
       "affcourt_valide":"Institut de recherche sur le cancer et le vieillissement (Nice, Alpes-Maritimes)",
@@ -221,10 +221,10 @@
       "HAL":"182186",
       "id":16,
       "parent_id":1,
-      "document-count-period":1677
+      "documents_count":1677
    },
    {
-      "affiliation-name":"Centre de Recherches en Histoires des Idées",
+      "affiliation_name":"Centre de Recherches en Histoires des Idées",
       "affiliation_id":"60110704",
       "ppn_valide":"026366584",
       "affcourt_valide":"Centre de recherche en histoire des idées. EA 4318 (Nice)",
@@ -235,10 +235,10 @@
       "HAL":"1723",
       "id":17,
       "parent_id":1,
-      "document-count-period":5
+      "documents_count":5
    },
    {
-      "affiliation-name":"Unité de Recherche Migrations et Société",
+      "affiliation_name":"Unité de Recherche Migrations et Société",
       "affiliation_id":"60110705",
       "ppn_valide":"201169754",
       "affcourt_valide":"Unité de recherche Migrations et Société. UMR 8245 (Paris 7 et Nice ; 2014-)",
@@ -249,10 +249,10 @@
       "HAL":"1004973",
       "id":18,
       "parent_id":1,
-      "document-count-period":48
+      "documents_count":48
    },
    {
-      "affiliation-name":"Groupe de Recherche en Droit, Économie et Gestion",
+      "affiliation_name":"Groupe de Recherche en Droit, Économie et Gestion",
       "affiliation_id":"60110706",
       "ppn_valide":"142564443",
       "affcourt_valide":"Groupe de recherche en droit, é9conomie et gestion (Valbonne, Alpes-Maritimes)",
@@ -263,10 +263,10 @@
       "HAL":"185786",
       "id":19,
       "parent_id":1,
-      "document-count-period":531
+      "documents_count":531
    },
    {
-      "affiliation-name":"Laboratoire Interdisciplinaire Récits, Cultures et Sociétés",
+      "affiliation_name":"Laboratoire Interdisciplinaire Récits, Cultures et Sociétés",
       "affiliation_id":"60110707",
       "ppn_valide":"166052167",
       "affcourt_valide":"Laboratoire interdisciplinaire Récits Cultures et Sociétés. EA 3159 (Nice ; 2012-....)",
@@ -277,10 +277,10 @@
       "HAL":"227789",
       "id":20,
       "parent_id":1,
-      "document-count-period":18
+      "documents_count":18
    },
    {
-      "affiliation-name":"Centre Transdisciplinaire D'épistémologie de la Littérature et des Arts Vivants",
+      "affiliation_name":"Centre Transdisciplinaire D'épistémologie de la Littérature et des Arts Vivants",
       "affiliation_id":"60110708",
       "ppn_valide":"183657101",
       "affcourt_valide":"Centre transdisciplinaire d’épistémologie de la littérature et des arts vivants (Nice ; 2012-....)",
@@ -291,10 +291,10 @@
       "HAL":"424925",
       "id":21,
       "parent_id":1,
-      "document-count-period":4
+      "documents_count":4
    },
    {
-      "affiliation-name":"Information Milieux, Médias, Médiations",
+      "affiliation_name":"Information Milieux, Médias, Médiations",
       "affiliation_id":"60110709",
       "ppn_valide":"099102609",
       "affcourt_valide":"Laboratoire de recherche Information, milieux, médias, médiations (Sophia Antipolis, Alpes-Maritimes)",
@@ -305,10 +305,10 @@
       "HAL":"",
       "id":22,
       "parent_id":1,
-      "document-count-period":2
+      "documents_count":2
    },
    {
-      "affiliation-name":"Laboratoire d'Anthropologie et de Psychologie Cliniques, Cognitives et Sociales",
+      "affiliation_name":"Laboratoire d'Anthropologie et de Psychologie Cliniques, Cognitives et Sociales",
       "affiliation_id":"60110710",
       "ppn_valide":"227478819",
       "affcourt_valide":"Laboratoire d'anthropologie et de psychologie cliniques, cognitives et sociales (Nice ; 2016-)",
@@ -319,10 +319,10 @@
       "HAL":"530129",
       "id":23,
       "parent_id":1,
-      "document-count-period":158
+      "documents_count":158
    },
    {
-      "affiliation-name":"Laboratoire Motricité Humaine Expertise Sport Santé",
+      "affiliation_name":"Laboratoire Motricité Humaine Expertise Sport Santé",
       "affiliation_id":"60110712",
       "ppn_valide":"177808659",
       "affcourt_valide":"Laboratoire Motricité Humaine, Expertise, Sport, Santé (LAMHESS) (Nice, Alpes-Maritimes ; Toulon, Var)",
@@ -333,10 +333,10 @@
       "HAL":"54697",
       "id":24,
       "parent_id":1,
-      "document-count-period":624
+      "documents_count":624
    },
    {
-      "affiliation-name":"Centre de la Méditerranée Moderne et Contemporaine",
+      "affiliation_name":"Centre de la Méditerranée Moderne et Contemporaine",
       "affiliation_id":"60110714",
       "ppn_valide":"026568810",
       "affcourt_valide":"Centre de la Méditerranée moderne et contemporaine (Nice)",
@@ -347,10 +347,10 @@
       "HAL":"30708",
       "id":25,
       "parent_id":1,
-      "document-count-period":13
+      "documents_count":13
    },
    {
-      "affiliation-name":"Institut Sophia Agrobiotech - (ISA)",
+      "affiliation_name":"Institut Sophia Agrobiotech - (ISA)",
       "affiliation_id":"60110715",
       "ppn_valide":"170849007",
       "affcourt_valide":"Institut Sophia Agrobiotech (Sophia Antipolis, Alpes-Maritimes)",
@@ -361,10 +361,10 @@
       "HAL":"1002392",
       "id":26,
       "parent_id":1,
-      "document-count-period":1301
+      "documents_count":1301
    },
    {
-      "affiliation-name":"Equipe de Recherche sur les Mutations de I'Europe et de ses Sociétés",
+      "affiliation_name":"Equipe de Recherche sur les Mutations de I'Europe et de ses Sociétés",
       "affiliation_id":"60110716",
       "ppn_valide":"",
       "affcourt_valide":"",
@@ -375,10 +375,10 @@
       "HAL":"",
       "id":27,
       "parent_id":1,
-      "document-count-period":8
+      "documents_count":8
    },
    {
-      "affiliation-name":"Ecology and Conservation Science for Sustainable Seas",
+      "affiliation_name":"Ecology and Conservation Science for Sustainable Seas",
       "affiliation_id":"60110717",
       "ppn_valide":"",
       "affcourt_valide":"",
@@ -389,10 +389,10 @@
       "HAL":"",
       "id":28,
       "parent_id":1,
-      "document-count-period":342
+      "documents_count":342
    },
    {
-      "affiliation-name":"Laboratoire D'informatique Signaux et Systèmes de Sophia-Antipolis",
+      "affiliation_name":"Laboratoire D'informatique Signaux et Systèmes de Sophia-Antipolis",
       "affiliation_id":"60110719",
       "ppn_valide":"",
       "affcourt_valide":"",
@@ -403,10 +403,10 @@
       "HAL":"",
       "id":29,
       "parent_id":1,
-      "document-count-period":1836
+      "documents_count":1836
    },
    {
-      "affiliation-name":"Groupe de Recherche en Management",
+      "affiliation_name":"Groupe de Recherche en Management",
       "affiliation_id":"60110721",
       "ppn_valide":"168839318",
       "affcourt_valide":"Groupe de recherche en management (Nice)",
@@ -417,10 +417,10 @@
       "HAL":"520677",
       "id":30,
       "parent_id":1,
-      "document-count-period":57
+      "documents_count":57
    },
    {
-      "affiliation-name":"Institut de Physique de Nice",
+      "affiliation_name":"Institut de Physique de Nice",
       "affiliation_id":"60110740",
       "ppn_valide":"223644501",
       "affcourt_valide":"Institut de Physique de Nice",
@@ -431,10 +431,10 @@
       "HAL":"497162",
       "id":31,
       "parent_id":1,
-      "document-count-period":2006
+      "documents_count":2006
    },
    {
-      "affiliation-name":"Laboratoire Polytech'LAB",
+      "affiliation_name":"Laboratoire Polytech'LAB",
       "affiliation_id":"60110741",
       "ppn_valide":"228311748",
       "affcourt_valide":"Polytech'Lab",
@@ -445,10 +445,10 @@
       "HAL":"537646",
       "id":32,
       "parent_id":1,
-      "document-count-period":220
+      "documents_count":220
    },
    {
-      "affiliation-name":"Astrophysique Relativiste, Théories, Expériences, Metrologie, Instrumentation, Signaux",
+      "affiliation_name":"Astrophysique Relativiste, Théories, Expériences, Metrologie, Instrumentation, Signaux",
       "affiliation_id":"60110743",
       "ppn_valide":"18467543X",
       "affcourt_valide":"Astrophysique Relativiste Théories Expériences Métrologie Instrumentation Signaux (Nice, Alpes-Maritimes)",
@@ -459,10 +459,10 @@
       "HAL":"",
       "id":33,
       "parent_id":2,
-      "document-count-period":2632
+      "documents_count":2632
    },
    {
-      "affiliation-name":"Laboratoire Joseph-Louis Lagrange",
+      "affiliation_name":"Laboratoire Joseph-Louis Lagrange",
       "affiliation_id":"60110744",
       "ppn_valide":"172058155",
       "affcourt_valide":"Laboratoire Joseph-Louis Lagrange (Nice, Alpes-Maritimes)",
@@ -473,10 +473,10 @@
       "HAL":"",
       "id":34,
       "parent_id":2,
-      "document-count-period":3270
+      "documents_count":3270
    },
    {
-      "affiliation-name":"Laboratoire D'électronique, Antennes et Télécommunications",
+      "affiliation_name":"Laboratoire D'électronique, Antennes et Télécommunications",
       "affiliation_id":"60110755",
       "ppn_valide":"06032466X",
       "affcourt_valide":"Laboratoire d'électronique, antennes et télécommunications (Sophia Antipolis, Alpes-Maritimes)",
@@ -487,10 +487,10 @@
       "HAL":"193834",
       "id":35,
       "parent_id":1,
-      "document-count-period":612
+      "documents_count":612
    },
    {
-      "affiliation-name":"Institut de Biologie Valrose",
+      "affiliation_name":"Institut de Biologie Valrose",
       "affiliation_id":"60110756",
       "ppn_valide":"178149357",
       "affcourt_valide":"Institut de biologie Valrose",
@@ -501,10 +501,10 @@
       "HAL":"182201",
       "id":36,
       "parent_id":1,
-      "document-count-period":1297
+      "documents_count":1297
    },
    {
-      "affiliation-name":"Centre Commun de Microscopie Appliquée",
+      "affiliation_name":"Centre Commun de Microscopie Appliquée",
       "affiliation_id":"60110760",
       "ppn_valide":"",
       "affcourt_valide":"",
@@ -515,10 +515,10 @@
       "HAL":"",
       "id":37,
       "parent_id":1,
-      "document-count-period":102
+      "documents_count":102
    },
    {
-      "affiliation-name":"Laboratoire de Physiomédecine Moléulaire",
+      "affiliation_name":"Laboratoire de Physiomédecine Moléulaire",
       "affiliation_id":"60110761",
       "ppn_valide":"186256728",
       "affcourt_valide":"Laboratoire de PhysioMédecine Moléculaire (Nice, Alpes-Maritimes)",
@@ -529,10 +529,10 @@
       "HAL":"201743",
       "id":38,
       "parent_id":1,
-      "document-count-period":226
+      "documents_count":226
    },
    {
-      "affiliation-name":"Bases, Corpus et Langage",
+      "affiliation_name":"Bases, Corpus et Langage",
       "affiliation_id":"60110762",
       "ppn_valide":"200912003",
       "affcourt_valide":"Bases, Corpus, Langage. UMR 7320 (Nice ; 2012-",
@@ -543,10 +543,10 @@
       "HAL":"60110762",
       "id":39,
       "parent_id":1,
-      "document-count-period":127
+      "documents_count":127
    },
    {
-      "affiliation-name":"Institut de Chimie de Nice",
+      "affiliation_name":"Institut de Chimie de Nice",
       "affiliation_id":"60110763",
       "ppn_valide":"172175038",
       "affcourt_valide":"Institut de chimie (Nice, Alpes-Maritimes)",
@@ -557,10 +557,10 @@
       "HAL":"212876",
       "id":40,
       "parent_id":1,
-      "document-count-period":1232
+      "documents_count":1232
    },
    {
-      "affiliation-name":"Cultures et Envirronements, Préhistoire, Antiquité, Moyen-Age",
+      "affiliation_name":"Cultures et Envirronements, Préhistoire, Antiquité, Moyen-Age",
       "affiliation_id":"60110764",
       "ppn_valide":"078599725",
       "affcourt_valide":"Cultures et Environnements. Préhistoire, Antiquité, Moyen Âge",
@@ -571,10 +571,10 @@
       "HAL":"199355",
       "id":41,
       "parent_id":1,
-      "document-count-period":369
+      "documents_count":369
    },
    {
-      "affiliation-name":"Unite de Pharmacogenetique et Radiogenetique des Cancers",
+      "affiliation_name":"Unite de Pharmacogenetique et Radiogenetique des Cancers",
       "affiliation_id":"60111234",
       "ppn_valide":"",
       "affcourt_valide":"",
@@ -585,10 +585,10 @@
       "HAL":"",
       "id":42,
       "parent_id":1,
-      "document-count-period":21
+      "documents_count":21
    },
    {
-      "affiliation-name":"Villa Arson",
+      "affiliation_name":"Villa Arson",
       "affiliation_id":"60122129",
       "ppn_valide":"02643587X",
       "affcourt_valide":"Villa Arson (Nice)",
@@ -599,10 +599,10 @@
       "HAL":"",
       "id":43,
       "parent_id":3,
-      "document-count-period":2
+      "documents_count":2
    },
    {
-      "affiliation-name":"NICE Lab, IMREDD",
+      "affiliation_name":"NICE Lab, IMREDD",
       "affiliation_id":"temp_001",
       "ppn_valide":"224352008",
       "affcourt_valide":"N.I.C.E. Lab",
@@ -613,10 +613,10 @@
       "HAL":"",
       "id":44,
       "parent_id":1,
-      "document-count-period":211
+      "documents_count":211
    },
    {
-      "affiliation-name":"Laboratoire d'Innovation et Numérique pour l'Éducation (#fabLINE)",
+      "affiliation_name":"Laboratoire d'Innovation et Numérique pour l'Éducation (#fabLINE)",
       "affiliation_id":"temp_002",
       "ppn_valide":"",
       "affcourt_valide":"",
@@ -627,10 +627,10 @@
       "HAL":"",
       "id":45,
       "parent_id":1,
-      "document-count-period":36
+      "documents_count":36
    },
    {
-      "affiliation-name":"EpoC",
+      "affiliation_name":"EpoC",
       "affiliation_id":"temp_003",
       "ppn_valide":"191470287",
       "affcourt_valide":"Électronique pour Objets Connectés (Biot, Alpes-Maritimes)",
@@ -641,10 +641,10 @@
       "HAL":"",
       "id":46,
       "parent_id":1,
-      "document-count-period":52
+      "documents_count":52
    },
    {
-      "affiliation-name":"Center of Modeling, Simulation, and Interactions",
+      "affiliation_name":"Center of Modeling, Simulation, and Interactions",
       "affiliation_id":"temp_004",
       "ppn_valide":"",
       "affcourt_valide":"",
@@ -655,10 +655,10 @@
       "HAL":"",
       "id":47,
       "parent_id":1,
-      "document-count-period":13
+      "documents_count":13
    },
    {
-      "affiliation-name":"LADIE",
+      "affiliation_name":"LADIE",
       "affiliation_id":"temp_005",
       "ppn_valide":"",
       "affcourt_valide":"",
@@ -669,10 +669,10 @@
       "HAL":"",
       "id":48,
       "parent_id":1,
-      "document-count-period":1
+      "documents_count":1
    },
    {
-      "affiliation-name":"Interdisciplinary Institute for Artificial Intelligence, 3iA Côte d’Azur",
+      "affiliation_name":"Interdisciplinary Institute for Artificial Intelligence, 3iA Côte d’Azur",
       "affiliation_id":"temp_006",
       "ppn_valide":"",
       "affcourt_valide":"",
@@ -683,10 +683,10 @@
       "HAL":"1090027",
       "id":50,
       "parent_id":1,
-      "document-count-period":0
+      "documents_count":0
    },
    {
-      "affiliation-name":"Unité de Recherche Clinique de la Côte d’Azur, URRIS UR2CA",
+      "affiliation_name":"Unité de Recherche Clinique de la Côte d’Azur, URRIS UR2CA",
       "affiliation_id":"temp_007",
       "ppn_valide":"",
       "affcourt_valide":"",
@@ -697,10 +697,10 @@
       "HAL":"1048785",
       "id":51,
       "parent_id":1,
-      "document-count-period":0
+      "documents_count":0
    },
    {
-      "affiliation-name":"UNS divers",
+      "affiliation_name":"UNS divers",
       "affiliation_id":"60033148",
       "ppn_valide":"",
       "affcourt_valide":"",
@@ -711,6 +711,6 @@
       "HAL":"",
       "id":49,
       "parent_id":1,
-      "document-count-period":10
+      "documents_count":10
    }
 ]
