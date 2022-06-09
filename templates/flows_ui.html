@@ -1,0 +1,52 @@
+{% extends "index.html" %}
+{% block container %}
+<section class="uk-section uk-section-large uk-section-light">
+    <div class="uk-container uk-container-large">
+        <dl class="uk-description-list uk-description-list-divider">
+            {%for i in range(0, len)%}
+            <dt>{{flows_py[i]}}</dt>
+            <dd><button class="uk-button uk-button-default" type="button" uk-toggle="target: #toggle-{{flows_py[i]}}">Administrer</button>
+                <div id="toggle-{{flows_py[i]}}" hidden>
+                    <button class="uk-button uk-button-primary" id="run-{{flows_py[i]}}" type="button">Lancer le flow</button>
+                    <div id="log-{{flows_py[i]}}" ></div>
+                    <div id="graph-{{flows_py[i]}}"></div>
+                </div>
+            </dd>
+            {%endfor%}
+        </dl>
+    </div>
+</section>
+<script type="text/javascript" charset="utf-8">    
+$(function(){ 
+    var main_url = 'http://' + document.domain + ':' + location.port
+    namespace = '/test'; 
+  var socket = io(namespace).connect('http://' + document.domain + ':' + location.port);
+  socket.on('connect', function() {
+            socket.emit('my_event', {data: 'connected to the SocketServer...'});
+        });
+  socket.on('my_response', function(data) {
+      msg = data.data
+       console.log(data);
+       $('#log-bso_theses').append('<br>' + $('<div/>').text('Flow messages : ' + msg).html());
+  });
+
+  $( "#run-bso_theses" ).click(function() {
+    //socket.emit('my_event', {data: 'run'});
+    $.ajax({
+        method: 'POST',
+        url: main_url + "/runflow",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: JSON.stringify({'flow_py_name':'bso_theses'}),
+        success: function (data) {
+            socket.disconnect()
+        },
+        error: function (data) {
+         
+        }
+    });
+
+});
+})
+</script>
+{% endblock %}

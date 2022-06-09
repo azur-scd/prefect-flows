@@ -1,55 +1,46 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
-    <title>Socket-Test</title>
+    <title>Prefect UI</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.14.3/dist/css/uikit.min.css" />
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.14.3/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.14.3/dist/js/uikit-icons.min.js"></script>
     <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
-    <!--<script type="text/javascript" charset="utf-8">
-        $(document).ready(function() {
-
-            namespace = '/test';
-            var socket = io(namespace);
-
-            socket.on('connect', function() {
-                socket.emit('my_event', {data: 'connected to the SocketServer...'});
-            });
-
-            socket.on('my_response', function(msg, cb) {
-                $('#log').append('<br>' + $('<div/>').text('logs #' + msg.count + ': ' + msg.data).html());
-                if (cb)
-                    cb();
-            });
-            $('form#emit').submit(function(event) {
-                socket.emit('my_event', {data: $('#emit_data').val()});
-                return false;
-            });
-            $('form#broadcast').submit(function(event) {
-                socket.emit('my_broadcast_event', {data: $('#broadcast_data').val()});
-                return false;
-            });
-            $('form#disconnect').submit(function(event) {
-                socket.emit('disconnect_request');
-                return false;
-            });
-        });
-    </script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+        integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>   
 </head>
-<body style="background-color:white;">
 
-    <h1 style="background-color:white;">Socket</h1>
-    <form id="emit" method="POST" action='#'>
-        <input type="text" name="emit_data" id="emit_data" placeholder="Message">
-        <input type="submit" value="Send Message">
-    </form>
-    <form id="broadcast" method="POST" action='#'>
-        <input type="text" name="broadcast_data" id="broadcast_data" placeholder="Message">
-        <input type="submit" value="Send Broadcast Message">
-    </form>
-
-    <form id="disconnect" method="POST" action="#">
-        <input type="submit" value="Disconnect Server">
-    </form>
-    <h2 style="background-color:white;">Logs</h2>
-    <div id="log" ></div>
+<body>
+    <div
+        uk-sticky="start: 200; animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; cls-inactive: uk-navbar-transparent uk-primary">
+        <nav class="uk-navbar-container" uk-navbar>
+            <ul class="uk-navbar-nav">
+                <li class="uk-active"><a href="#">Prefect flows Admin</a></li>
+                <li>
+            </ul>
+        </nav>
+    </div>
+    {% block container %}
+    {% endblock %}
+    <footer class="uk-section uk-section-default uk-section-small">
+        <div class="uk-container">
+            <p class="uk-text-small uk-text-center">2021 - SCD Université Côte d'Azur.
+                | Built with
+                <a href="http://getuikit.com" target="_blank" data-uk-tooltip>
+                    <span data-uk-icon="uikit"></span>
+                </a>
+            </p>
+        </div>
+    </footer>
 </body>
+
 </html>

@@ -6,6 +6,8 @@ from threading import Lock
 import pandas as pd
 import requests
 import json
+import os
+import subprocess
 
 async_mode = None
 app = Flask(__name__)
@@ -15,9 +17,37 @@ socket_ = SocketIO(app, async_mode=async_mode)
 thread = None
 thread_lock = Lock()
 
+class Installer:
+   def run(command):
+        # Some code here
+        proc = subprocess.Popen(
+            [ 'powershell.exe', command ],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        return proc
+
+def file_path(relative_path):
+    folder = os.path.dirname(os.path.abspath("__file__"))
+    path_parts = relative_path.split("/")
+    new_path = os.path.join(folder, *path_parts)
+    return new_path
+
 @app.route('/')
 def index():
-    return render_template('test.html', async_mode=socket_.async_mode)
+    flows_py = []
+    for root, dirs, files in os.walk("flows"):
+        for file in files:
+            if file == "flow.py":
+                print(root)
+                #flows_py.append(os.path.join(root, file))
+                flows_py.append(root.partition("\\")[2])
+    return render_template('flows_ui.html', flows_py=flows_py,len=len(flows_py),async_mode=socket_.async_mode)
+
+
+"""@app.route('/')
+def index():
+    return render_template('test.html', async_mode=socket_.async_mode)"""
 
 
 @socket_.on('my_event', namespace='/test')
@@ -26,29 +56,7 @@ def test_message(message):
     emit('my_response',
          {'data': message['data']})
 
-
-"""@socket_.on('my_broadcast_event', namespace='/test')
-def test_broadcast_message(message):
-    session['receive_count'] = session.get('receive_count', 0) + 1
-    emit('my_response',
-         {'data': message['data'], 'count': session['receive_count']},
-         broadcast=True)
-
-
-@socket_.on('disconnect_request', namespace='/test')
-def disconnect_request():
-    @copy_current_request_context
-    def can_disconnect():
-        disconnect()
-
-    session['receive_count'] = session.get('receive_count', 0) + 1
-    emit('my_response',
-         {'data': 'Disconnected!', 'count': session['receive_count']},
-         callback=can_disconnect)"""
-
-
-
-@app.route('/test-state', methods = ['POST'])
+@app.route('/', methods = ['POST'])
 @socket_.on('my_response', namespace='/test')
 def get_state():
     message = request.get_json(force=True)
@@ -57,6 +65,16 @@ def get_state():
     emit('my_response', message, broadcast=True, namespace='/test')
     return message
 
+@app.route('/runflow', methods = ['POST'])
+def runflow():
+    request_data = json.loads(request.data)
+    flow_py_name = request_data.get('flow_py_name')
+    #subprocess.call("prefect run -p flows/bso_theses/flow.py",shell=True)
+    #subprocess.run(["prefect","run","-p","flows/bso_theses/flow.py"], shell=True)
+    installer = Installer()
+    installer.run("C:/Users/geoffroy/Docker/prefect-flows/venv_prefect/Scripts/python.exe prefect run -p ../../flows/bso_theses/flow.py")
+
 
 if __name__ == '__main__':
     socket_.run(app,debug=True,port=5000,host="0.0.0.0") 
+    #usage console : python app.py puis prefect run -p flows/bso_theses/flow.py

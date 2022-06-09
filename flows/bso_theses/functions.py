@@ -32,4 +32,6 @@ def  scrapping_oai_sets_dewey():
                 "code": row.findAll("td")[1].get_text(strip=True),
             }
         )
-    return oai_list
+    df = pd.DataFrame(oai_list[1:])
+    df['main_domain'] = df['code'].apply(lambda x: 'Sciences, Technologies, Santé' if ((str(x[4]) == "5") | (str(x[4]) == "6") | (str(x[4:7]) == "004")) else 'Lettres, sciences Humaines et Sociales')
+    return df
