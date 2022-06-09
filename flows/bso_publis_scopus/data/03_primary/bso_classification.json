@@ -1,7 +1,7 @@
 [
    {
       "name_fr":"Medical research",
-      "name_en":"recherche médicale",
+      "name_en":"Recherche médicale",
 	  "main_domain": "Sciences, Technologies, Santé"
    },
     {
@@ -48,5 +48,10 @@
       "name_fr":"Ingénierie",
       "name_en":"Engineering",
 	  "main_domain": "Sciences, Technologies, Santé"
+   },
+    {
+      "name_fr":"Inconnu",
+      "name_en":"unknown",
+	  "main_domain": "Inconnu"
    }
 ]

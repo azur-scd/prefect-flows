@@ -203,10 +203,18 @@ def get_bso_classification_data(publis_uniques_doi_oa_data,observation_date) -> 
     #merge with main oa file
     publis_uniques_doi_oa_data["bso_classification"] = np.nan
     publis_uniques_doi_oa_data.loc[publis_uniques_doi_oa_data[col].isin(temp[col]), cols_to_replace] = temp.loc[temp[col].isin(publis_uniques_doi_oa_data[col]),cols_to_replace].values
-    publis_uniques_doi_oa_data[cols_to_replace] = publis_uniques_doi_oa_data[cols_to_replace].fillna("unknown")
+    publis_uniques_doi_oa_data[cols_to_replace] = publis_uniques_doi_oa_data[cols_to_replace].fillna("unknown").replace(r'\r\n', '', regex=True)
+    # bricolage à finaliser
+    df_bso_classification = pd.read_json("../data/03_primary/bso_classification.json")
+    publis_uniques_doi_oa_data.loc[publis_uniques_doi_oa_data["bso_classification"] == "Computer and  information sciences", "bso_classification"] = "Computer and information sciences"
+    df=pd.merge(publis_uniques_doi_oa_data,df_bso_classification, left_on='bso_classification', right_on='name_en',how="left").drop(columns=['name_en']).rename(columns={"name_fr": "bso_classification_fr"})
+    df.loc[d["bso_classification"] == "Biology (fond.)", "bso_classification_fr"] = "Biologie fondamentale"
+    df.loc[d["bso_classification"] == "Biology (fond.)", "main_domain"] = "Sciences, Technologies, Santé"
+    df.loc[d["bso_classification"] == "Medical research", "bso_classification_fr"] = "Recherche médicale"
+    df.loc[d["bso_classification"] == "Medical research", "main_domain"] = "Sciences, Technologies, Santé"
     # erase the previous file
-    publis_uniques_doi_oa_data.to_csv("data/07_model_output/{0}/publis_uniques_doi_oa_data_with_bsoclasses.csv".format(observation_date), index= False,encoding='utf8')
-    return publis_uniques_doi_oa_data
+    df.to_csv("data/07_model_output/{0}/publis_uniques_doi_oa_data_with_bsoclasses.csv".format(observation_date), index= False,encoding='utf8')
+    return df
 
 with Flow(name=FLOW_NAME) as flow:
     observation_date = Parameter('observation_date',default = "2022-05-04")
@@ -232,5 +240,6 @@ with Flow(name=FLOW_NAME) as flow:
 flow.register(project_name="barometre")
 flow.storage=storage
 flow.run_config=LocalRun()
-flow.run(observation_date="2022-05-04", corpus_end_year=2022)
+#flow.run(observation_date="2022-05-04", corpus_end_year=2022)
+flow.run(observation_date="2022-05-04")
 #flow.visualize()
