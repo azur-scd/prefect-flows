@@ -1,57 +1,57 @@
 [
    {
-      "name_fr":"Medical research",
-      "name_en":"Recherche médicale",
+      "name_en":"Medical research",
+      "name_fr":"Recherche médicale",
 	  "main_domain": "Sciences, Technologies, Santé"
    },
     {
-      "name_fr":"Biology (fond.)",
-      "name_en":"Biologie fondamentale",
+      "name_en":"Biology (fond.)",
+      "name_fr":"Biologie fondamentale",
 	  "main_domain": "Sciences, Technologies, Santé"
    },
     {
+	  "name_en":"Physical sciences, Astronomy",
       "name_fr":"Sciences physiques et astronomie",
-      "name_en":"Physical sciences, Astronomy",
 	  "main_domain": "Sciences, Technologies, Santé"
    },
     {
-      "name_fr":"Chimie",
       "name_en":"Chemistry",
+	  "name_fr":"Chimie",
 	  "main_domain": "Sciences, Technologies, Santé"
    },
     {
-      "name_fr":"Social sciences",
-      "name_en":"Sciences sociales",
+      "name_en":"Social sciences",
+      "name_fr":"Sciences sociales",
 	  "main_domain": "Lettres, sciences Humaines et Sociales"
    },
     {
-      "name_fr":"Mathématiques",
-      "name_en":"Mathematics",
+      "name_en":"Mathématiques",
+      "name_fr":"Mathematics",
 	  "main_domain": "Sciences, Technologies, Santé"
    },
     {
-      "name_fr":"Sciences de la Terre, écologie, énergie et biologie appliquée",
       "name_en":"Earth, Ecology, Energy and applied biology",
+	  "name_fr":"Sciences de la Terre, écologie, énergie et biologie appliquée",
 	  "main_domain": "Sciences, Technologies, Santé"
    },
     {
-      "name_fr":"Informatique et sciences de l'information",
       "name_en":"Computer and information sciences",
+	  "name_fr":"Informatique et sciences de l'information",
 	  "main_domain": "Sciences, Technologies, Santé"
    },
     {
-      "name_fr":"Sciences humaines",
       "name_en":"Humanities",
+	  "name_fr":"Sciences humaines",
 	  "main_domain": "Lettres, sciences Humaines et Sociales"
    },
     {
-      "name_fr":"Ingénierie",
       "name_en":"Engineering",
+	  "name_fr":"Ingénierie",
 	  "main_domain": "Sciences, Technologies, Santé"
    },
     {
-      "name_fr":"Inconnu",
       "name_en":"unknown",
+	  "name_fr":"Inconnu",
 	  "main_domain": "Inconnu"
    }
 ]
