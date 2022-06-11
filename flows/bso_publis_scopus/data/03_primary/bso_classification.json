@@ -25,8 +25,8 @@
 	  "main_domain": "Lettres, sciences Humaines et Sociales"
    },
     {
-      "name_en":"Mathématiques",
-      "name_fr":"Mathematics",
+      "name_en":"Mathematics",
+	  "name_fr":"Mathématiques",
 	  "main_domain": "Sciences, Technologies, Santé"
    },
     {
