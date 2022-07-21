@@ -5,48 +5,109 @@
         <dl class="uk-description-list uk-description-list-divider">
             {%for i in range(0, len)%}
             <dt>{{flows_py[i]}}</dt>
-            <dd><button class="uk-button uk-button-default" type="button" uk-toggle="target: #toggle-{{flows_py[i]}}">Administrer</button>
+            <dd><button class="uk-button uk-button-default" type="button"
+                    uk-toggle="target: #toggle-{{flows_py[i]}}">Administrer</button>
                 <div id="toggle-{{flows_py[i]}}" hidden>
-                    <button class="uk-button uk-button-primary" id="run-{{flows_py[i]}}" type="button">Lancer le flow</button>
-                    <div id="log-{{flows_py[i]}}" ></div>
-                    <div id="graph-{{flows_py[i]}}"></div>
+                    <button class="uk-button uk-button-primary" id="run-{{flows_py[i]}}" type="button">Lancer le
+                        flow</button>
+                    <div id="log-{{flows_py[i]}}"></div>
+                    <div id="chart-{{flows_py[i]}}" style="width:900px;height:550px;"></div>
                 </div>
             </dd>
             {%endfor%}
         </dl>
     </div>
 </section>
-<script type="text/javascript" charset="utf-8">    
-$(function(){ 
-    var main_url = 'http://' + document.domain + ':' + location.port
-    namespace = '/test'; 
-  var socket = io(namespace).connect('http://' + document.domain + ':' + location.port);
-  socket.on('connect', function() {
-            socket.emit('my_event', {data: 'connected to the SocketServer...'});
-        });
-  socket.on('my_response', function(data) {
-      msg = data.data
-       console.log(data);
-       $('#log-bso_theses').append('<br>' + $('<div/>').text('Flow messages : ' + msg).html());
-  });
+<script type="text/javascript" charset="utf-8">
 
-  $( "#run-bso_theses" ).click(function() {
-    //socket.emit('my_event', {data: 'run'});
-    $.ajax({
-        method: 'POST',
-        url: main_url + "/runflow",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: JSON.stringify({'flow_py_name':'bso_theses'}),
-        success: function (data) {
-            socket.disconnect()
-        },
-        error: function (data) {
-         
+    $(function () {
+
+        Date.prototype.today = function () {
+            return this.getFullYear() + "-" + (((this.getMonth() + 1) < 10) ? "0" : "") + (this.getMonth() + 1) + "-" + ((this.getDate() < 10) ? "0" : "") + this.getDate()
         }
-    });
+        // For the time now
+        Date.prototype.timeNow = function () {
+            return ((this.getHours() < 10) ? "0" : "") + this.getHours() + ":" + ((this.getMinutes() < 10) ? "0" : "") + this.getMinutes() + ":" + ((this.getSeconds() < 10) ? "0" : "") + this.getSeconds();
+        }
 
-});
-})
+
+        var main_url = 'http://' + document.domain + ':' + location.port
+        namespace = '/test';
+        var msg_queue = []
+        var socket = io(namespace).connect('http://' + document.domain + ':' + location.port);
+
+        socket.on('connect', function () {
+            socket.emit('my_event', { data: 'connected to the SocketServer...' });
+        });
+        socket.on('my_response', function (data) {
+            msg = data.data
+            $('#log-bso_theses').append('<br>' + $('<div/>').text('Flow messages : ' + msg).html());
+            task_start_date = msg.split('starting at ')[1]
+            task_state = msg.split('starting at')[0]
+            msg_queue.push({ "desc": msg.split('starting at')[0], "startDate": task_start_date, y: 1 })
+        })
+
+        var newDate = new Date();
+
+        Plotly.newPlot('chart-bso_theses', [{
+            y: [1],
+            x: [newDate.today() + " " + newDate.timeNow()],
+            //mode: 'lines',
+            mode: 'lines+markers+text',
+            text: ['Connected...'],
+            textposition: 'top',
+            type: 'scatter'
+        }]);
+
+        var cnt = 0;
+
+        var interval = setInterval(function () {
+            console.log(msg_queue)
+            msg_queue_increment = msg_queue.map((item, index) => { return { "number": index, ...item } })
+            Plotly.extendTraces('chart-bso_theses', {
+                y: [msg_queue_increment.map(d => d.number)],
+                x: [msg_queue_increment.map(d => d.startDate)],
+                text: [msg_queue_increment.map(d => d.desc)]
+            }, [0])
+
+            if (++cnt === 100) clearInterval(interval);
+        }, 300);
+
+        $("#run-bso_theses").click(function () {
+            //socket.emit('my_event', {data: 'run'});
+            $.ajax({
+                method: 'POST',
+                url: main_url + "/runflow",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify({ 'flow_py_name': 'bso_theses' }),
+                success: function (data) {
+                    socket.disconnect()
+                },
+                error: function (data) {
+
+                }
+            });
+
+        });
+        $("#run-flow_de_test").click(function () {
+            //socket.emit('my_event', {data: 'run'});
+            $.ajax({
+                method: 'POST',
+                url: main_url + "/runflow",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify({ 'flow_py_name': 'flow_de_test' }),
+                success: function (data) {
+                   // socket.disconnect()
+                   console.log("launched...")
+                },
+                error: function (data) {
+
+                }
+            });
+
+        });
+    })
 </script>
 {% endblock %}

@@ -8,6 +8,7 @@ import requests
 import json
 import os
 import subprocess
+from subprocess import Popen, PIPE, STDOUT,  CalledProcessError
 
 async_mode = None
 app = Flask(__name__)
@@ -49,30 +50,43 @@ def index():
 def index():
     return render_template('test.html', async_mode=socket_.async_mode)"""
 
-
+# correspond à socket.on('connect', function(){} dans flow_ui.html
 @socket_.on('my_event', namespace='/test')
 def test_message(message):
     print(message)
     emit('my_response',
          {'data': message['data']})
 
+# correspond à socket.on('my_response', function(data) {} dans flow_ui.html
 @app.route('/', methods = ['POST'])
 @socket_.on('my_response', namespace='/test')
 def get_state():
     message = request.get_json(force=True)
     print(message)
-    #emit('my_response', {'data':message}, broadcast=True, namespace='/test')
+    #emit('my_response', {'data':message,'counter':out}, broadcast=True, namespace='/test')
     emit('my_response', message, broadcast=True, namespace='/test')
     return message
 
+# tentative de lancement par CLI du flow
 @app.route('/runflow', methods = ['POST'])
 def runflow():
     request_data = json.loads(request.data)
     flow_py_name = request_data.get('flow_py_name')
-    #subprocess.call("prefect run -p flows/bso_theses/flow.py",shell=True)
+    """process = Popen("prefect run -p flows/{0}/flow.py".format(flow_py_name), shell=True, stdout=PIPE, stderr=STDOUT)
+    with process.stdout:
+        try:
+            for line in iter(process.stdout.readline, b''):
+                print(line.decode("utf-8").strip())
+            
+        except CalledProcessError as e:
+            print(f"{str(e)}")"""
+    try:
+        subprocess.check_output("C:/Users/geoffroy/Docker/prefect-flows/venv_prefect/Scripts/python.exe","prefect","run","-p","flows/flow_de_test/flow.py",shell=True,stderr=subprocess.STDOUT)
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
     #subprocess.run(["prefect","run","-p","flows/bso_theses/flow.py"], shell=True)
-    installer = Installer()
-    installer.run("C:/Users/geoffroy/Docker/prefect-flows/venv_prefect/Scripts/python.exe prefect run -p ../../flows/bso_theses/flow.py")
+    #installer = Installer()
+    #installer.run("C:/Users/geoffroy/Docker/prefect-flows/venv_prefect/Scripts/python.exe prefect run -p ../../flows/bso_theses/flow.py")
 
 
 if __name__ == '__main__':
