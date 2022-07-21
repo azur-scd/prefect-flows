@@ -63,7 +63,7 @@ def save_data(df) -> pd.DataFrame:
 
 @task(log_stdout=True, name="load_oai_data")
 def load_oai_data() -> pd.DataFrame :
-    df = fn.scrapping_oai_sets_dewey()
+    df = scrapping_oai_sets_dewey()
     df.to_csv(f"{FLOW_PATH}/data/oai_sets.csv", index=False, encoding='utf8')
     return df
 
