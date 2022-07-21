@@ -12,7 +12,6 @@ from bs4 import BeautifulSoup
 import json
 import re
 from datetime import datetime
-import flow_de_test.functions as fn
 
 FLOW_NAME = "flow-de-test"
 storage = Local()
