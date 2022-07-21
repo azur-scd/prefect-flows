@@ -73,7 +73,7 @@ with Flow(name=FLOW_NAME) as flow:
 
 flow.register(project_name="projet_de_test")
 flow.storage=storage_github
-flow.run_config=LocalRun()
+flow.run_config=LocalRun(labels=["dev"])
 flow.run()
 
 # Prefect cloud
