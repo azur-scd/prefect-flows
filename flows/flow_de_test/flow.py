@@ -45,7 +45,7 @@ def  scrapping_oai_sets_dewey():
 @task(log_stdout=True, name="load_oai_data")
 def load_oai_data() -> pd.DataFrame :
     df = scrapping_oai_sets_dewey()
-    df.to_csv("oai_sets.csv", index=False, encoding='utf8')
+    df.to_csv(f"{FLOW_PATH}/data/oai_sets.csv", index=False, encoding='utf8')
     return df
 
 with Flow(name=FLOW_NAME) as flow:
@@ -53,7 +53,7 @@ with Flow(name=FLOW_NAME) as flow:
 
 
 flow.register(project_name="projet_de_test")
-flow.storage=storage_github
+flow.storage=storage
 flow.run_config=LocalRun()
 flow.run()
 

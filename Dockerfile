@@ -10,4 +10,4 @@ RUN pip install pandas requests beautifulsoup4 lxml
 #ou pip install -r requirements.txt
 RUN prefect backend cloud
 RUN prefect auth login --key ${PREFECT_API_KEY}
-CMD ["./prefect-start.sh"]
+CMD ["./entrypoint.sh"]
